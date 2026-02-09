@@ -9,15 +9,16 @@ echo ---------------------------------------
 echo 1. Tao file .env tu .env.example (voi lua chon SESSION_DRIVER)
 echo 2. Chuyen sang SQLite
 echo 3. Chuyen sang MySQL
-echo 4. Thoat
+echo 4. Migrate
+echo 5. Thoat
 echo ---------------------------------------
-set /p choice=Nhap lua chon (1, 2, 3, 4): 
+set /p choice=Nhap lua chon (1, 2, 3, 4, 5): 
 
 if "%choice%"=="1" goto create_env
 if "%choice%"=="2" goto sqlite
 if "%choice%"=="3" goto mysql
-if "%choice%"=="4" goto end
-
+if "%choice%"=="4" goto migrate
+if "%choice%"=="5" goto end
 echo Lua chon khong hop le!
 pause
 goto menu
@@ -288,6 +289,16 @@ echo Xoa cache Laravel...
 php artisan config:clear >nul 2>&1
 php artisan cache:clear >nul 2>&1
 echo Da xoa cache thanh cong!
+pause
+goto menu
+
+:: ==============================
+:: Migrate
+:: ==============================
+:migrate
+echo Chay lenh migrate...
+php artisan migrate
+echo Migrate thanh cong
 pause
 goto menu
 
