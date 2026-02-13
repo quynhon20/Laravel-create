@@ -5,9 +5,11 @@ echo ==========================================
 echo.
 echo 1. php artisan migrate (chay migration moi)
 echo 2. php artisan migrate:fresh (xoa tat ca bang va chay lai migration)
-echo 3. php artisan migrate:rollback (hoan tac lan migrate gan nhat)
-echo 4. php artisan migrate:reset (xoa tat ca bang va hoan tac tat ca migration)
-echo 5. php artisan migrate:status (kiem tra trang thai migration)
+echo 3. php artisan migrate:fresh --seed (xoa tat ca bang va chay lai migration, chay seed data)
+echo 4. php artisan migrate:rollback (hoan tac lan migrate gan nhat)
+echo 5. php artisan migrate:reset (xoa tat ca bang va hoan tac tat ca migration)
+echo 6. php artisan migrate:status (kiem tra trang thai migration)
+echo 7. php artisan db:seed (seed data)
 
 echo 0. Thoat
 echo.
@@ -16,9 +18,11 @@ set /p choice=Chon so (0-6):
 
 if "%choice%"=="1" goto MIGRATE
 if "%choice%"=="2" goto FRESH
-if "%choice%"=="3" goto ROLLBACK
-if "%choice%"=="4" goto RESET
-if "%choice%"=="5" goto STATUS
+if "%choice%"=="3" goto FRESHSEED
+if "%choice%"=="4" goto ROLLBACK
+if "%choice%"=="5" goto RESET
+if "%choice%"=="6" goto STATUS
+if "%choice%"=="7" goto SEED
 if "%choice%"=="0" goto EXIT
 
 echo Lua chon khong hop le!
@@ -50,9 +54,21 @@ echo.
 echo Hoan thanh!
 pause
 exit
+:: ========================
+:: 3. MIGRATE:FRESH SEED
+:: ========================
+:FRESH
+echo ------------------------------------------
+echo Running: php artisan migrate:fresh --seed
+echo ------------------------------------------
+php artisan migrate:fresh --seed
+echo.
+echo Hoan thanh!
+pause
+exit
 
 :: ========================
-:: 3. MIGRATE:ROLLBACK
+:: 4. MIGRATE:ROLLBACK
 :: ========================
 :ROLLBACK
 echo ------------------------------------------
@@ -65,7 +81,7 @@ pause
 exit
 
 :: ========================
-:: 4. MIGRATE:RESET
+:: 5. MIGRATE:RESET
 :: ========================
 :RESET
 echo ------------------------------------------
@@ -78,13 +94,25 @@ pause
 exit
 
 :: ========================
-:: 5. MIGRATE:STATUS
+:: 6. MIGRATE:STATUS
 :: ========================
 :STATUS
 echo ------------------------------------------
 echo Running: php artisan migrate:status
 echo ------------------------------------------
 php artisan migrate:status
+echo.
+echo Hoan thanh!
+pause
+exit
+:: ========================
+:: 7. SEED
+:: ========================
+:STATUS
+echo ------------------------------------------
+echo Running: php artisan db:seed
+echo ------------------------------------------
+php artisan db:seed
 echo.
 echo Hoan thanh!
 pause
